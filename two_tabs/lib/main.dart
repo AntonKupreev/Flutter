@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<String> nav = ['Список 1', 'Список 2'];
+  final List<String> nav = ['Список 111', 'Список 2'];
   final List fakeData = List.generate(100, (index) => index.toString());
 
   Map<String, dynamic> data = {

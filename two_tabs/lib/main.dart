@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'List view divider',
+              'List view',
             ),
           ],
         ),

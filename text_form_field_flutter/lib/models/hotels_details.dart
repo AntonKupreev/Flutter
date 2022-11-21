@@ -34,7 +34,7 @@ class _HotelDetailsState extends State<HotelDetails> {
             }),
         builder: (context, snapshot) {
           if (isOk == false) {
-            return const Center(child: Text('Контент не найден'));
+            return const Center(child: Text('Контент не найден!!!'));
           }
           if (snapshot.data == null) {
             return const Center(

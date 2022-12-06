@@ -27,7 +27,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Column(
         children: [
           TextFormField(
-            key: Key('firstName'),
+            key: Key('firstNameField'),
             decoration: InputDecoration(labelText: 'First name'),
             validator: (value) {
               if (value == '') return 'Введите имя';

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
@@ -50,11 +52,23 @@ void main() {
     );
   });
 
-  group('Rigister form tests', () {
+  group('Register form tests', () {
     FlutterDriver driver;
+    var fieldFinderFirstName = find.byValueKey('fisrtName');
+    var fieldFinderLastName = find.byValueKey('lastName');
+    var fieldFinderPhone2 = find.byValueKey('phoneField');
+    var fieldFinderEmail = find.byValueKey('emailField');
+    var fieldFinderSubmit2 = find.text('Отправить');
 
     setUpAll(() async {
       driver = await FlutterDriver.connect();
+
+      await driver.tap(find.byValueKey('enterButton'));
+      fieldFinderFirstName = find.byValueKey('firstNameField');
+      fieldFinderLastName = find.byValueKey('lastName');
+      fieldFinderPhone2 = find.byValueKey('phoneField');
+      fieldFinderEmail = find.byValueKey('emailField');
+      fieldFinderSubmit2 = find.text('Отправить');
     });
 
     tearDownAll(() async {
@@ -62,21 +76,17 @@ void main() {
         driver.close();
       }
     });
-    final fieldFinderFistName = find.byValueKey('fisrtName');
-    final fieldFinderLastName = find.byValueKey('lastName');
-    final fieldFinderPhone2 = find.byValueKey('phoneField');
-    final fieldFinderEmail = find.byValueKey('emailField');
-    final fieldFinderSubmit2 = find.text('Отправить');
 
     test(
       'Test First name field',
       () async {
-        await driver.tap(fieldFinderFistName);
-        await driver.waitFor(find.text(''));
+        await sleep(Duration(seconds: 1));
+        await driver.tap(fieldFinderFirstName);
+        // await driver.waitFor(find.text(''));
         await driver.enterText('Ivan');
         // await driver.waitFor(find.text('Ivan'));
       },
-      timeout: Timeout.factor(5),
+      timeout: Timeout.factor(2),
     );
     test(
       'Test Last name field',

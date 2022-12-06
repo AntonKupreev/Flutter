@@ -4,15 +4,19 @@ import 'package:lessons_10_testing/components/register_form.dart';
 
 enum FormType { login, register }
 
+var defaultLoginType = FormType.login;
+
 class LoginView extends StatefulWidget {
-  LoginView({Key key}) : super(key: key);
+  LoginView({
+    Key key,
+  }) : super(key: key);
 
   @override
   _LoginViewState createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
-  FormType _formType = FormType.login;
+  FormType _formType = defaultLoginType;
 
   _switchForm() {
     setState(() {
@@ -58,6 +62,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     FlatButton(
                       child: RichText(
+                        key: Key('enterButton'),
                         text: TextSpan(children: [
                           TextSpan(
                             text: _formType == FormType.login
@@ -68,6 +73,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       onPressed: _switchForm,
                     ),
+                    //TextButton(onPressed: _switchForm, child: Text('Войти'))
                   ],
                 ),
               ],

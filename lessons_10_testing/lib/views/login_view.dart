@@ -47,8 +47,12 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                       _formType == FormType.login
-                          ? LoginForm()
-                          : RegisterForm(),
+                          ? LoginForm(
+                              key: Key('Login'),
+                            )
+                          : RegisterForm(
+                              key: Key('Register'),
+                            ),
                     ],
                   ),
                 ),

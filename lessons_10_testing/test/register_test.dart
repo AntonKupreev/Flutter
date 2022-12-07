@@ -9,16 +9,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lessons_10_testing/components/login_form.dart';
 import 'package:lessons_10_testing/components/register_form.dart';
 import 'package:lessons_10_testing/views/login_view.dart';
 
 void main() {
-  group('Login view tests', () {
-    testWidgets("Вход", (WidgetTester tester) async {
+  group('Register form tests', () {
+    testWidgets("Регистрация", (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: LoginForm(
+          body: RegisterForm(
             key: Key('Register'),
           ),
         ),
@@ -27,22 +26,29 @@ void main() {
           DefaultWidgetsLocalizations.delegate,
         ],
       ));
-
-      expect(find.byKey(Key('fieldEmail')), findsOneWidget);
-      expect(find.byKey(Key('fieldPhone')), findsOneWidget);
+      final titleFinder = find.text('Регистрация');
+      expect(find.byKey(Key('firstNameField')), findsOneWidget);
+      expect(find.byKey(Key('lastName')), findsOneWidget);
+      expect(find.byKey(Key('phoneField')), findsOneWidget);
+      expect(find.byKey(Key('emailField')), findsOneWidget);
       expect(find.text('Отправить'), findsOneWidget);
-      expect(find.text('Добро пожаловать'), findsNothing);
+      expect(find.text('Вы успешно зарегистрировались'), findsNothing);
 
-      await tester.enterText(find.byKey(Key('fieldEmail')), 'test@test.com');
-      expect(find.text('test@test.com'), findsOneWidget);
+      await tester.enterText(find.byKey(Key('firstNameField')), 'Ivan');
+      expect(find.text('Ivan'), findsOneWidget);
 
-      await tester.enterText(find.byKey(Key('fieldPhone')), '12345678');
+      await tester.enterText(find.byKey(Key('lastName')), 'Ivanov');
+      expect(find.text('Ivanov'), findsOneWidget);
+
+      await tester.enterText(find.byKey(Key('phoneField')), '12345678');
       expect(find.text('12345678'), findsOneWidget);
+
+      await tester.enterText(find.byKey(Key('emailField')), 'test@test.com');
+      expect(find.text('test@test.com'), findsOneWidget);
 
       await tester.tap(find.text('Отправить'));
       await tester.pump();
-      expect(find.text('Добро пожаловать'), findsOneWidget);
-
+      expect(find.text('Вы успешно зарегистрировались'), findsOneWidget);
       // TODO: write tests
     });
   });

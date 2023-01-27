@@ -1,4 +1,4 @@
-import 'package:flutter_arhitector/data/app_model.dart';
+import 'package:bussines/src/app_model.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

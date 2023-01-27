@@ -1,19 +1,19 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_arhitector/data/app_model.dart';
-import 'package:flutter_arhitector/buisness/users.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_arhitector/data/app_model.dart';
 import 'package:get_it/get_it.dart';
 
-// This is our global ServiceLocator
+import 'package:flutter_arhitector/buisness/users.dart';
+
 GetIt getIt = GetIt.instance;
 
 void main() {
+  getIt.registerSingleton<AppModel>(AppModelImplementation(),
+      signalsReady: true);
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,14 +38,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    getIt.isReady<App>().then((_) => getIt<App>().addListener(update));
+    getIt
+        .isReady<AppModel>()
+        .then((_) => getIt<AppModel>().addListener(update));
 
     super.initState();
   }
 
   @override
   void dispose() {
-    getIt<App>().removeListener(update);
+    getIt<AppModel>().removeListener(update);
     super.dispose();
   }
 
@@ -70,14 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         'You have pushed the button this many times:',
                       ),
                       Text(
-                        getIt<App>().counter.toString(),
+                        getIt<AppModel>().counter.toString(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ],
                   ),
                 ),
                 floatingActionButton: FloatingActionButton(
-                  onPressed: getIt<App>().incrementCounter,
+                  onPressed: getIt<AppModel>().incrementCounter,
                   tooltip: 'Increment',
                   child: Icon(Icons.add),
                 ),

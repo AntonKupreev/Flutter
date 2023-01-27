@@ -1,5 +1,5 @@
+import 'package:bussines/src/getit_base.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_arhitector/main.dart';
 
 class AppModel extends ChangeNotifier {
   void incrementCounter() {}

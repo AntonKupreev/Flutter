@@ -1,5 +1,5 @@
-import 'package:bussines/src/app_model.dart';
 import 'package:get_it/get_it.dart';
+import 'package:module_buissnes/module_buissnes.dart';
 
 final getIt = GetIt.instance;
 

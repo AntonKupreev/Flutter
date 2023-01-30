@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_arhitector/data/app_model.dart';
-import 'package:get_it/get_it.dart';
+//import 'package:flutter_arhitector/data/app_model.dart';
 
 import 'package:flutter_arhitector/buisness/users.dart';
+import 'package:get_it/get_it.dart';
+import 'package:module_buissnes/module_buissnes.dart';
 
 GetIt getIt = GetIt.instance;
 

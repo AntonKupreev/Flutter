@@ -35,7 +35,8 @@ dependencies:
   get_it: ^7.2.0 
   freezed_annotation: ^2.2.0
   module_buissnes:
-    path: packages/module_buisness
+    path: packages/module_buissnes
+ 
    
 
 
@@ -45,8 +46,7 @@ dependencies:
   json_annotation: ^4.8.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  
   injectable_generator: ^2.1.3
   build_runner: ^2.3.3 
   freezed: ^2.3.2

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 //import 'package:flutter_arhitector/data/app_model.dart';
 
@@ -37,59 +39,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    getIt
-        .isReady<AppModel>()
-        .then((_) => getIt<AppModel>().addListener(update));
-
-    super.initState();
-  }
+  final imgStream = StreamController<Image>();
 
   @override
   void dispose() {
-    getIt<AppModel>().removeListener(update);
+    imgStream.close();
     super.dispose();
   }
-
-  void update() => setState(() => {});
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: FutureBuilder(
-          future: getIt.allReady(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(widget.title),
-                ),
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'You have pushed the button this many times:',
-                      ),
-                      Text(
-                        getIt<AppModel>().counter.toString(),
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ],
-                  ),
-                ),
-                floatingActionButton: FloatingActionButton(
-                  onPressed: getIt<AppModel>().incrementCounter,
-                  tooltip: 'Increment',
-                  child: Icon(Icons.add),
-                ),
-              );
-            } else {
+      child: StreamBuilder(
+          stream: imgStream.stream,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (!snapshot.hasData) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: const [
                   Text('Waiting for initialisation'),
                   SizedBox(
                     height: 16,
@@ -98,6 +66,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               );
             }
+
+            if (snapshot.connectionState == ConnectionState.done) {}
+
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(widget.title),
+              ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'You have pushed the button this many times:',
+                    ),
+                    Text(
+                      getIt<AppModel>().counter.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ],
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: getIt<AppModel>().incrementCounter,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+            );
           }),
     );
   }
